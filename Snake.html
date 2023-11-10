@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Snake</title>
+    <script src="Snake.js"></script>
+    <script src="jquery.js"></script>
+    <link rel="stylesheet" href="Snake.css">
+</head>
+
+<body>
+    <script>
+        //Color Tiles
+        function ColorTiles() {
+            for (var x = 0; x <= Snake.length; x++) {
+                $("#Tile" + Snake[x - 1] + "").css("background-color", "black");
+                if($("#Tile"+(Snake[0]+MoveDirection)).css("background-color")=="black"){
+                  lost=true;
+                  movable=false;
+                }
+            }
+        }
+        $(document).ready(function() {
+            $(document).keydown(function(e) {
+                var code = e.keyCode || e.which;
+                if(movable==true){
+                switch (code) {
+                    case 37:
+                        if(MoveDirection!=1){
+                          if(Snake[0]%width==0){
+                            dont=true;
+                          }
+                        MoveDirection = -1;
+                        movable=false;
+                        }
+                        break;
+                    case 38:
+                    if(MoveDirection!=width){
+                        MoveDirection = -width;
+                        movable=false;
+                        }
+                        break;
+                    case 39:
+                    if(MoveDirection!=-1){
+                      if(Snake[0]%width==1){
+                        dont=true;
+                      }
+                        MoveDirection = 1;
+                        movable=false;
+                      }
+                        break;
+                    case 40:
+                    if(MoveDirection!=-width){
+                        MoveDirection = width;
+                        movable = false;
+                        }
+                        break;
+                }
+              }
+            });
+            //Initialize Board
+            for (var i = 0; i < width; i++) {
+                for (var j = 0; j < height; j++) {
+                    $("#Board").append("<div class='Tile' style='width:" + calcWidth + "px;height:" + calcHeight + "px' id='Tile" + count + "'></div>");
+                    count++;
+                }
+            }
+            //Setup Random Snake
+            $("#Tile" + Snake[0] + "").css("background-color", "black");
+            Food();
+            setInterval(function() {
+              movable=true;
+              Move();
+              if(lost==false){
+                $(".Tile").css("background-color", "rgb(19, 83, 81)");
+              }
+                ColorTiles();
+                $("#Tile" + food + "").css("background-color", "red");
+                //Move();
+                if (Snake[0] == food) {
+                    score++;
+                    $("#Score").html("Punktzahl: "+score);
+                    Snake[Snake.length] = 0;
+                    Move();
+                    $("#Tile" + food + "").css("background-color", "rgb(19, 83, 81)");
+                    Food();
+                    $("#Tile" + food + "").css("background-color", "red");
+                }
+            }, 130);
+        });
+    </script>
+    <div id="overlay">
+      <h1 id="Lost">Du hast verloren!</h1>
+    </div>
+    <h1 id="header">Snake Game</h1>
+    <div id="Board">
+    </div>
+    <h1 id="Score">Punktzahl: 2</h1>
+</body>
+
+</html>

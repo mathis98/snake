@@ -1,0 +1,42 @@
+*{
+  margin:0;
+  border:0;
+  font-family: Calibri,sans-serif;
+}
+#header{
+  text-align:center;
+  font-size: 50px;
+  text-decoration:underline;
+  margin-bottom: 30px;
+}
+#Board{
+  width: 1000px;
+  margin: 0 auto;
+  height: 465px;
+  border-right:2px solid black;
+  border-bottom:2px solid black;
+  background-color: rgb(19, 83, 81);
+}
+.Tile{
+  display: inline-block;
+  border:2px solid black;
+  border-right: 0;
+  border-bottom:0;
+  margin-bottom:-6px;
+}
+#overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    background:rgba(255, 255, 255, 0.6);
+    z-index:5;
+    width:100%;
+    height:100%;
+    display:none;
+}
+#Lost{
+  font-size: 80px;
+  text-align:center;
+  position: relative;
+  top: 300px;
+}
